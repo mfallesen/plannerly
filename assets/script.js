@@ -15,8 +15,9 @@
 
 // Date Picker event listener
   $(document).ready(function(){
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker({defaultDate: new Date(), setDefaultDate: true, minDate: new Date()});
   });
+
 
 // Make My Date button also makes ajax call to openweather API and retrieves weather for date selected. (if not available then tell user "Sorry No weather data is available that far ahead")
 // This call should be made using the same search parameter as the restaurants since it works on the same function
