@@ -1,4 +1,3 @@
-
 // declare global variables
 let city = '';
 
@@ -6,59 +5,60 @@ let city = '';
 
 // Date Picker event listener
 
-$(document).ready(function () {
-  $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
+$(document).ready(function() {
+    $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
 });
 
 
 // event listener for the Make my date button event on #citySearch
 
-document.getElementById("dateBtn").addEventListener("click", function (event) {
-  event.preventDefault();
-  city = $(".citySearch").val();
-  console.log(city);
-  var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
-  
-  var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
+document.getElementById("dateBtn").addEventListener("click", function(event) {
+    $('#heroImg').css('display', 'none')
+    event.preventDefault();
+    city = $(".citySearch").val();
+    console.log(city);
+    var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
 
-  // Call Weather
-  loadWeatherData(city);
+    var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
+
+    // Call Weather
+    loadWeatherData(city);
 
 
-  //Retrieve Lat and Lon
-  $.ajax({
-    url: queryCity,
-    method: "GET"
-  }).then(function (response) {
-    console.log(response)
-    //local variables for Lat and Lon
-    var lat = response.location_suggestions[0].latitude
-    var lon = response.location_suggestions[0].longitude
-
-    //call restaurant information
-    var queryRest = `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&sort=rating&order=dec&apikey=${zomatoKey}`;
-
+    //Retrieve Lat and Lon
     $.ajax({
-      url: queryRest,
-      method: "GET"
-    }).then(function (restaurant) {
-      console.log(restaurant)
+        url: queryCity,
+        method: "GET"
+    }).then(function(response) {
+        console.log(response)
+            //local variables for Lat and Lon
+        var lat = response.location_suggestions[0].latitude
+        var lon = response.location_suggestions[0].longitude
+
+        //call restaurant information
+        var queryRest = `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&sort=rating&order=dec&apikey=${zomatoKey}`;
+
+        $.ajax({
+            url: queryRest,
+            method: "GET"
+        }).then(function(restaurant) {
+            console.log(restaurant)
+        })
     })
-  })
 
 
-  // Weather
-  function loadWeatherData(cityName) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
-    $.ajax({
-      type: "GET",
-      url: queryURL,
-      dataType: "json",
-      success: function (data) {
-        console.log("data:", data);
+    // Weather
+    function loadWeatherData(cityName) {
+        var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
+        $.ajax({
+            type: "GET",
+            url: queryURL,
+            dataType: "json",
+            success: function(data) {
+                console.log("data:", data);
 
-        $("#today").empty();
-        var weatherElements = `
+                $("#today").empty();
+                var weatherElements = `
       <div class="card">
           <div class="card-body">
               <h3 class="card-title">
@@ -73,13 +73,13 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
           </div>
       </div>
       `;
-        $("#today").html(weatherElements);
+                $("#today").html(weatherElements);
 
 
 
-      },
-    });
-  } 
+            },
+        });
+    }
 
 
 
@@ -108,16 +108,16 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
 // Needed info: City name Temperature, wind, and conditions (icon should be fine but we can also add text saying "bring an umbrella!" or similar)
 
 function loadWeatherData(cityName) {
-  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
-  $.ajax({
-    type: "GET",
-    url: queryURL,
-    dataType: "json",
-    success: function (data) {
-      console.log("data:", data);
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
+    $.ajax({
+        type: "GET",
+        url: queryURL,
+        dataType: "json",
+        success: function(data) {
+            console.log("data:", data);
 
-      $("#today").empty();
-      var weatherElements = `
+            $("#today").empty();
+            var weatherElements = `
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">
@@ -132,12 +132,12 @@ function loadWeatherData(cityName) {
             </div>
         </div>
         `;
-      $("#today").html(weatherElements);
+            $("#today").html(weatherElements);
 
 
 
-    },
-  });
+        },
+    });
 }
 
 // take randomized dinner choice and build the page elements to contain it
@@ -171,4 +171,3 @@ function loadWeatherData(cityName) {
 //         console.log(restaurant)
 //     })
 // })
-
