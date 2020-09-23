@@ -3,6 +3,12 @@
 
 
 // event listener for the Make my date button event on #citySearch
+
+document.getElementById("dateBtn").addEventListener("click", function(event) {
+ event.preventDefault();
+});
+
+
 // search parameters should be city or zip?
 // event Listener makes call to Zomato (with restrictions in both ratings and mileage if possible) when clicked (and/or enter is hit?)
 
