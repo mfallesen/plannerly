@@ -43,6 +43,25 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
       method: "GET"
     }).then(function (restaurant) {
       console.log(restaurant)
+//Pull random restaurant
+      var i = Math.floor(Math.random()*21);
+      console.log(i)
+
+      var image = $("<img>");
+      image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
+      console.log(image)
+
+      var selectRest = $("<h4>");
+      selectRest = restaurant.restaurants[i].restaurant.name;
+      console.log(selectRest)
+
+      var phone = $("<p>");
+      phone = restaurant.restaurants[i].restaurant.phone_numbers;
+      console.log(phone)
+
+      var address = $("<p>");
+      address = restaurant.restaurants[i].restaurant.location.address;
+      console.log(address);  
     })
   })
 
