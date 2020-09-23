@@ -14,15 +14,50 @@
 
 
 // Date Picker event listener
-  $(document).ready(function(){
+$(document).ready(function() {
     $('.datepicker').datepicker();
-  });
+});
 
 // Make My Date button also makes ajax call to openweather API and retrieves weather for date selected. (if not available then tell user "Sorry No weather data is available that far ahead")
 // This call should be made using the same search parameter as the restaurants since it works on the same function
 
 // build the weather object and append to the page
 // Needed info: City name Temperature, wind, and conditions (icon should be fine but we can also add text saying "bring an umbrella!" or similar)
+
+function loadWeatherData(cityName) {
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
+    $.ajax({
+        type: "GET",
+        url: queryURL,
+        dataType: "json",
+        success: function(data) {
+            console.log("data:", data);
+
+            $("#today").empty();
+            var weatherElements = `
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">
+                    ${data.name} (${new Date().toLocaleDateString()})
+                    <img src="https://openweathermap.org/img/w/${
+                    data.weather[0].icon
+                    }.png"/>
+                </h3>
+                <p class="card-text">Temperature: ${data.main.temp}  °F</p>
+                <p class="card-text">Humidity: ${data.main.humidity} %</p>
+                <p class="card-text">Wind Speed: ${
+                data.wind.speed
+                } MPH</p>
+            </div>
+        </div>
+        `;
+            $("#today").html(weatherElements);
+
+
+
+        },
+    });
+}
 
 // take randomized dinner choice and build the page elements to contain it
 // image of restaurant first. Header with restaurant name and small blurb describing food underneath
