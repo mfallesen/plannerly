@@ -1,4 +1,3 @@
-
 // declare global variables
 let city = '';
 
@@ -6,45 +5,49 @@ let city = '';
 
 // Date Picker event listener
 
-$(document).ready(function () {
-  $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
+$(document).ready(function() {
+    $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
 });
 
 
 // event listener for the Make my date button event on #citySearch
 
-document.getElementById("dateBtn").addEventListener("click", function (event) {
-  event.preventDefault();
-  city = $(".citySearch").val();
-  console.log(city);
-  var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
-  
-  var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
+document.getElementById("dateBtn").addEventListener("click", function(event) {
+    
+    event.preventDefault();
+  $('#heroImg').css('display', 'none');
+    city = $(".citySearch").val();
+    console.log(city);
+    var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
 
-  // Call Weather
-  loadWeatherData(city);
+    var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
+
+    // Call Weather
+    loadWeatherData(city);
 
 
-  //Retrieve Lat and Lon
-  $.ajax({
-    url: queryCity,
-    method: "GET"
-  }).then(function (response) {
-    console.log(response)
-    //local variables for Lat and Lon
-    var lat = response.location_suggestions[0].latitude
-    var lon = response.location_suggestions[0].longitude
-
-    //call restaurant information
-    var queryRest = `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&sort=rating&order=dec&apikey=${zomatoKey}`;
-
+    //Retrieve Lat and Lon
     $.ajax({
-      url: queryRest,
-      method: "GET"
-    }).then(function (restaurant) {
-      console.log(restaurant)
+        url: queryCity,
+        method: "GET"
+    }).then(function(response) {
+        console.log(response)
+            //local variables for Lat and Lon
+        var lat = response.location_suggestions[0].latitude
+        var lon = response.location_suggestions[0].longitude
+
+        //call restaurant information
+        var queryRest = `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&sort=rating&order=dec&apikey=${zomatoKey}`;
+
+        $.ajax({
+            url: queryRest,
+            method: "GET"
+        }).then(function(restaurant) {
+            console.log(restaurant)
+        })
     })
-  })
+
+
 
 
   // Weather
@@ -61,6 +64,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
         var weatherElements = `
       <div class="col s12">
           <div class="row">
+
               <h3 class="card-title">
                   ${data.name} (${new Date().toLocaleDateString()})
                   <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"/>
@@ -69,13 +73,16 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
           </div>
       </div>
       `;
+
+
         $("#weatherEl").html(weatherElements);
 
 
 
-      },
-    });
-  } 
+
+            },
+        });
+    }
 
 
 
@@ -103,38 +110,6 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
 // build the weather object and append to the page
 // Needed info: City name Temperature, wind, and conditions (icon should be fine but we can also add text saying "bring an umbrella!" or similar)
 
-function loadWeatherData(cityName) {
-  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
-  $.ajax({
-    type: "GET",
-    url: queryURL,
-    dataType: "json",
-    success: function (data) {
-      console.log("data:", data);
-
-      $("#today").empty();
-      var weatherElements = `
-        <div class="card">
-            <div class="card-body">
-                <h3 class="card-title">
-                    ${data.name} (${new Date().toLocaleDateString()})
-                    <img src="https://openweathermap.org/img/w/${data.weather[0].icon
-        }.png"/>
-                </h3>
-                <p class="card-text">Temperature: ${data.main.temp}  °F</p>
-                <p class="card-text">Humidity: ${data.main.humidity} %</p>
-                <p class="card-text">Wind Speed: ${data.wind.speed
-        } MPH</p>
-            </div>
-        </div>
-        `;
-      $("#today").html(weatherElements);
-
-
-
-    },
-  });
-}
 
 // take randomized dinner choice and build the page elements to contain it
 
@@ -167,4 +142,3 @@ function loadWeatherData(cityName) {
 //         console.log(restaurant)
 //     })
 // })
-
