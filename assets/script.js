@@ -57,23 +57,19 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
       success: function (data) {
         console.log("data:", data);
 
-        $("#today").empty();
+        $("#weatherEl").empty();
         var weatherElements = `
-      <div class="card">
-          <div class="card-body">
+      <div class="col s12">
+          <div class="row">
               <h3 class="card-title">
                   ${data.name} (${new Date().toLocaleDateString()})
-                  <img src="https://openweathermap.org/img/w/${data.weather[0].icon
-          }.png"/>
+                  <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"/>
               </h3>
               <p class="card-text">Temperature: ${data.main.temp}  °F</p>
-              <p class="card-text">Humidity: ${data.main.humidity} %</p>
-              <p class="card-text">Wind Speed: ${data.wind.speed
-          } MPH</p>
           </div>
       </div>
       `;
-        $("#today").html(weatherElements);
+        $("#weatherEl").html(weatherElements);
 
 
 
