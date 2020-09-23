@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make My Date!</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+  <!-- Navbar with logo on right with placeholder link -->
+  <div class="navbar-fixed ">
+    <nav class="">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">Make My Date!</a>
+      </div>
+    </nav>
+  </div>
+  <!-- One container that has everything  -->
+  <div class="container center-align">
+    <!-- Weather Container to be hidden initally -->
+    <div class="row" id="weatherEl"></div>
+    <!-- foodChoice Container to be hidden initially -->
+    <div class="row" id="foodChoice"></div>
+    <!-- Image Container -->
+    <div class="row">
+      <div class="col s12">
+        <img id="heroImg"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTAI0DOnLrPT38DiuBzv6GtqZ0WpoQDnMEcZQ&usqp=CAU">
+      </div>
+    </div>
+    <!-- Input -->
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <!--City Input -->
+          <div class="input-field col s12 m6">
+            <textarea id="icon_prefix2" class="citySearch materialize-textarea"></textarea>
+            <label for="icon_prefix2">City of Date</label>
+          </div>
+          <div class="row">
+            <!-- Date Selector-->
+            <div class="col s12 m6">
+              <input type="text" class="datepicker col s12 m6" placeholder="Night of Date">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Check Boxes -->
+    <form action="#">
+      <p>
+        <label>
+          <input type="checkbox" class="filled-in" checked="checked" id="resturant" />
+          <span>Resturants</span>
+        </label>
+      </p>
+      <!-- <p>
+        <label>
+          <input type="checkbox" class="filled-in" checked="checked" id="event />
+          <span>Events</span>
+        </label>
+      </p>
+      
+      <p>
+        <label>
+          <input type="checkbox" class="filled-in" checked="checked" id="drinks" />
+          <span>Drinks</span>
+        </label>
+      </p> -->
+    </form>
+    <!-- Make My Date Btn -->
+    <button class="btn waves-effect waves-light" id="dateBtn" type="submit" name="action">Make My Date
+      <i class="material-icons right">send</i>
+    </button>
+
+
+  </div>
+  <!-- Footer -->
+  <footer class="page-footer" id="footer">
+    <div class="footer-copyright ">
+      <div class="container">
+        Footer
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="assets/script.js"></script>
+</body>
+
+</html>

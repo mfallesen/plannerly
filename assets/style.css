@@ -1,0 +1,26 @@
+
+/* Sticky Footer Settings */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color:#54727d;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+  nav {
+    background-color: #d39391;
+  }
+  
+  .btn {
+    background-color:#04092f ;
+  }
+
+  .page-footer  {
+    background-color: #d39391;
+  }
+  .page-footer .footer-copyright {
+    background-color: #d39391;
+  }
