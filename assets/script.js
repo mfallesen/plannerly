@@ -5,25 +5,31 @@ let city = '';
 
 // Date Picker event listener
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
 });
+
 
 
 // event listener for the Make my date button event on #citySearch
 
 document.getElementById("dateBtn").addEventListener("click", function(event) {
-    
+
     event.preventDefault();
-  $('#heroImg').css('display', 'none');
+    $('#heroImg').css('display', 'none');
     city = $(".citySearch").val();
     console.log(city);
+
+
+
+
     var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
 
     var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
 
     // Call Weather
-    loadWeatherData(city);
+    // loadWeatherData(city);
+
 
 
     //Retrieve Lat and Lon
@@ -31,90 +37,99 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
         url: queryCity,
         method: "GET"
-    }).then(function(response) {
-        console.log(response)
+    }).then(function (response) {
+         console.log(response)
+         if (response.location_suggestions.length === 0) {
+            console.log("invalid Input")
+            return
+        } 
+
             //local variables for Lat and Lon
-        var lat = response.location_suggestions[0].latitude
-        var lon = response.location_suggestions[0].longitude
+            var lat = response.location_suggestions[0].latitude
+            var lon = response.location_suggestions[0].longitude
+         
 
         //call restaurant information
         var queryRest = `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&sort=rating&order=dec&apikey=${zomatoKey}`;
 
         $.ajax({
             url: queryRest,
-    method: "GET"
-  }).then(function (restaurant) {
-    console.log(restaurant)
-//Pull random restaurant
-    var i = Math.floor(Math.random()*21);
-    console.log(i)
+            method: "GET"
+        }).then(function(restaurant) {
+            console.log(restaurant)
+                //Pull random restaurant
+            var i = Math.floor(Math.random() * 21);
+            console.log(i)
 
-    var image = $("<img>");
-    image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
-    image.attr("id", "restImage")
-    image.attr("alt", "Image of restaraunt food.")
-    console.log(image)
-    $("#foodChoice").append(image)
+            $('#foodChoice').empty()
 
-    var selectRest = $("<h2>");
-    selectRest.text(restaurant.restaurants[i].restaurant.name)
-    console.log(selectRest)
-    $("#foodChoice").append(selectRest)
+            var image = $("<img>");
+            image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
+            image.attr("id", "restImage")
+            image.attr("alt", "Image of restaraunt food.")
+            image.attr("class", "responsive-img")
+            console.log(image)
+            $("#foodChoice").append(image)
 
-    var phone = $("<h4>");
-    phone.text(restaurant.restaurants[i].restaurant.phone_numbers)
-    console.log(phone)
-    $("#foodChoice").append(phone)
+            var selectRest = $("<h2>");
+            selectRest.text(restaurant.restaurants[i].restaurant.name)
+            console.log(selectRest)
+            $("#foodChoice").append(selectRest)
 
-    var address = $("<h4>");
-    address.text(restaurant.restaurants[i].restaurant.location.address)
-    console.log(address);  
-    $("#foodChoice").append(address)
+            var phone = $("<h4>");
+            phone.text(restaurant.restaurants[i].restaurant.phone_numbers)
+            console.log(phone)
+            $("#foodChoice").append(phone)
 
-        //     url: queryRest,
-        //     method: "GET"
-        // }).then(function(restaurant) {
-        //     console.log(restaurant)
+            var address = $("<h4>");
+            address.text(restaurant.restaurants[i].restaurant.location.address)
+            console.log(address);
+            $("#foodChoice").append(address)
+
+            //     url: queryRest,
+            //     method: "GET"
+            // }).then(function(restaurant) {
+            //     console.log(restaurant)
         })
-    })
+    
 
-//     url: queryRest,
-//     method: "GET"
-//   }).then(function (restaurant) {
-//     console.log(restaurant)
-// //Pull random restaurant
-//     var i = Math.floor(Math.random()*21);
-//     console.log(i)
+    //     url: queryRest,
+    //     method: "GET"
+    //   }).then(function (restaurant) {
+    //     console.log(restaurant)
+    // //Pull random restaurant
+    //     var i = Math.floor(Math.random()*21);
+    //     console.log(i)
 
-//     var image = $("<img>");
-//     image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
-//     console.log(image)
+    //     var image = $("<img>");
+    //     image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
+    //     console.log(image)
 
-//     var selectRest = $("<h4>");
-//     selectRest = restaurant.restaurants[i].restaurant.name;
-//     console.log(selectRest)
+    //     var selectRest = $("<h4>");
+    //     selectRest = restaurant.restaurants[i].restaurant.name;
+    //     console.log(selectRest)
 
-//     var phone = $("<p>");
-//     phone = restaurant.restaurants[i].restaurant.phone_numbers;
-//     console.log(phone)
+    //     var phone = $("<p>");
+    //     phone = restaurant.restaurants[i].restaurant.phone_numbers;
+    //     console.log(phone)
 
-//     var address = $("<p>");
-//     address = restaurant.restaurants[i].restaurant.location.address;
-//     console.log(address);  
+    //     var address = $("<p>");
+    //     address = restaurant.restaurants[i].restaurant.location.address;
+    //     console.log(address);  
 
 
-  // Weather
-  function loadWeatherData(cityName) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
-    $.ajax({
-      type: "GET",
-      url: queryURL,
-      dataType: "json",
-      success: function (data) {
-        console.log("data:", data);
+    // Weather
+    function loadWeatherData(cityName) {
+        var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
+        $.ajax({
+            type: "GET",
+            url: queryURL,
+            dataType: "json",
+            success: function(data) {
+                console.log("data:", data);
 
-        $("#weatherEl").empty();
-        var weatherElements = `
+                $("#weatherEl").empty();
+                var weatherElements = `
       <div class="col s12">
           <div class="row">
 
@@ -128,7 +143,7 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
       `;
 
 
-        $("#weatherEl").html(weatherElements);
+                $("#weatherEl").html(weatherElements);
 
 
 
@@ -140,7 +155,6 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
 
 });
-
 
 
 
@@ -194,4 +208,4 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 //     }).then(function(restaurant){
 //         console.log(restaurant)
 //     })
-// })
+ })
