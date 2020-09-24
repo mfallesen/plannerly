@@ -53,6 +53,7 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
     image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
     image.attr("id", "restImage")
     image.attr("alt", "Image of restaraunt food.")
+    image.attr("class", "responsive-img")
     console.log(image)
     $("#foodChoice").append(image)
 
