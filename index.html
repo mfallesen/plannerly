@@ -17,7 +17,7 @@
   <div class="navbar-fixed ">
     <nav class="">
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Make My Date!</a>
+        <a href="#!" class="brand-logo center">Make My Date!</a>
       </div>
     </nav>
   </div>
@@ -29,26 +29,26 @@
     <div class="row" id="foodChoice"></div>
     <!-- Image Container -->
     <div class="row">
-      <div class="col s12">
-        <img id="heroImg"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTAI0DOnLrPT38DiuBzv6GtqZ0WpoQDnMEcZQ&usqp=CAU">
+      <div class="container col s12">
+        <img id="heroImg" class="responsive-img"
+          src="assets/images/pexels-andrea-piacquadio-842546.jpg">
       </div>
     </div>
     <!-- Input -->
     <div class="row">
-      <form class="col s12">
+      <form class="col s12 center-align">
         <div class="row">
           <!--City Input -->
-          <div class="input-field col s12 m6">
+          <div class="input-field col s12 ">
             <textarea id="icon_prefix2" class="citySearch materialize-textarea"></textarea>
-            <label for="icon_prefix2">City of Date</label>
+            <label for="icon_prefix2">Take us out in:</label>
           </div>
-          <div class="row">
+          
             <!-- Date Selector-->
-            <div class="col s12 m6">
+            <div class="col s12 date-adjust">
               <input type="text" class="datepicker col s12 m6" placeholder="Night of Date">
             </div>
-          </div>
+          
         </div>
       </form>
     </div>
@@ -57,7 +57,7 @@
     <form action="#">
       <p>
         <label>
-          <input type="checkbox" class="filled-in" checked="checked" id="resturant" />
+          <input type="checkbox" class="filled-in" checked="checked" id="restaurant" />
           <span>Resturants</span>
         </label>
       </p>
@@ -86,7 +86,7 @@
   <footer class="page-footer" id="footer">
     <div class="footer-copyright ">
       <div class="container">
-        Footer
+        Copyright&#169 2020 Team 8 Studio
       </div>
     </div>
   </footer>
