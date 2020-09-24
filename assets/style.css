@@ -51,6 +51,7 @@ body {
     margin:20px;
     font-size: 20px;
     border-radius: 5px;
+    margin-bottom: 100px;
   }
 
   .page-footer {
@@ -61,4 +62,5 @@ body {
     background-color:  #d39391;
     color: white;
     text-align: center;
+    
   }
