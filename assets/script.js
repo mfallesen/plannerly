@@ -51,21 +51,23 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
     var image = $("<img>");
     image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
+    image.attr("id", "restImage")
+    image.attr("alt", "Image of restaraunt food.")
     console.log(image)
     $("#foodChoice").append(image)
 
     var selectRest = $("<h2>");
-    selectRest = restaurant.restaurants[i].restaurant.name;
+    selectRest.text(restaurant.restaurants[i].restaurant.name)
     console.log(selectRest)
     $("#foodChoice").append(selectRest)
 
-    var phone = $("<p>");
-    phone = restaurant.restaurants[i].restaurant.phone_numbers;
+    var phone = $("<h4>");
+    phone.text(restaurant.restaurants[i].restaurant.phone_numbers)
     console.log(phone)
     $("#foodChoice").append(phone)
 
-    var address = $("<p>");
-    address = restaurant.restaurants[i].restaurant.location.address;
+    var address = $("<h4>");
+    address.text(restaurant.restaurants[i].restaurant.location.address)
     console.log(address);  
     $("#foodChoice").append(address)
 
