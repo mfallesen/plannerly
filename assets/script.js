@@ -14,23 +14,15 @@ $(document).ready(function () {
 // event listener for the Make my date button event on #citySearch
 
 document.getElementById("dateBtn").addEventListener("click", function(event) {
-
     event.preventDefault();
     $('#heroImg').css('display', 'none');
     city = $(".citySearch").val();
     console.log(city);
 
 
-
-
     var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
 
     var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
-
-    // Call Weather
-    // loadWeatherData(city);
-
-
 
     //Retrieve Lat and Lon
     $.ajax({
@@ -141,17 +133,12 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
           </div>
       </div>
       `;
-
-
                 $("#weatherEl").html(weatherElements);
-
-
-
-
             },
         });
     }
-
+    // Call Weather Function
+    loadWeatherData(city);
 
 
 });
