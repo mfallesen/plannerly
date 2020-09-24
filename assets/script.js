@@ -13,12 +13,7 @@ $(document).ready(function () {
 
 // event listener for the Make my date button event on #citySearch
 
-<<<<<<< HEAD
-document.getElementById("dateBtn").addEventListener("click", function (event) {
-
-=======
 document.getElementById("dateBtn").addEventListener("click", function(event) {
->>>>>>> DEV
 
     event.preventDefault();
     $('#heroImg').css('display', 'none');
@@ -60,14 +55,6 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
         $.ajax({
             url: queryRest,
             method: "GET"
-<<<<<<< HEAD
-        }).then(function (restaurant) {
-            console.log(restaurant)
-            //Pull random restaurant
-            var i = Math.floor(Math.random() * 21);
-            console.log(i)
-
-=======
         }).then(function(restaurant) {
             console.log(restaurant)
                 //Pull random restaurant
@@ -76,15 +63,11 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
             $('#foodChoice').empty()
 
->>>>>>> DEV
             var image = $("<img>");
             image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
             image.attr("id", "restImage")
             image.attr("alt", "Image of restaraunt food.")
-<<<<<<< HEAD
-=======
             image.attr("class", "responsive-img")
->>>>>>> DEV
             console.log(image)
             $("#foodChoice").append(image)
 
@@ -103,10 +86,6 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             console.log(address);
             $("#foodChoice").append(address)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> DEV
             //     url: queryRest,
             //     method: "GET"
             // }).then(function(restaurant) {
@@ -146,11 +125,7 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             type: "GET",
             url: queryURL,
             dataType: "json",
-<<<<<<< HEAD
-            success: function (data) {
-=======
             success: function(data) {
->>>>>>> DEV
                 console.log("data:", data);
 
                 $("#weatherEl").empty();
