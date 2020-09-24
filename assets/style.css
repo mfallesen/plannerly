@@ -1,66 +1,68 @@
-
 /* Sticky Footer Settings */
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color:#54727d;
-  }
+    background-color: #54727d;
+}
 
-  main {
+main {
     flex: 1 0 auto;
-  }
-  nav {
+}
+
+nav {
     background-color: #d39391;
-  }
+}
 
-  nav .brand-logo {
+nav .brand-logo {
     font-size: 40px;
-  }
-  
-  .btn {
-    background-color:#04092f ;
-  }
+}
 
-  .page-footer  {
+.btn {
+    background-color: #04092f;
+}
+
+.page-footer {
     background-color: #d39391;
     z-index: 2;
-  }
-  .page-footer .footer-copyright {
-    background-color: #d39391;
-  }
+}
 
-  .input-field {
+.page-footer .footer-copyright {
+    background-color: #d39391;
+}
+
+.input-field {
     background-color: lightgray;
     border-radius: 5px;
     margin-right: 10px;
-    margin-left:10px;
-  }
-  .date-adjust {
+    margin-left: 10px;
+}
+
+.date-adjust {
     margin-top: 1rem;
     margin-bottom: 1rem;
     background-color: lightgray;
     border-radius: 5px;
-  }
+}
 
-  .datepicker {
+.datepicker {
     /* margin-top: 14px!important; */
-  }
+}
 
-  #dateBtn {
-    margin:20px;
+#dateBtn {
+    margin: 20px;
     font-size: 20px;
     border-radius: 5px;
     margin-bottom: 100px;
-  }
+}
 
-  .page-footer {
+.page-footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color:  #d39391;
+    background-color: #d39391;
     color: white;
     text-align: center;
-    
-  }
+}
