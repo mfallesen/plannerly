@@ -5,25 +5,36 @@ let city = '';
 
 // Date Picker event listener
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
 });
 
 
+
 // event listener for the Make my date button event on #citySearch
 
+<<<<<<< HEAD
+document.getElementById("dateBtn").addEventListener("click", function (event) {
+
+=======
 document.getElementById("dateBtn").addEventListener("click", function(event) {
+>>>>>>> DEV
 
     event.preventDefault();
     $('#heroImg').css('display', 'none');
     city = $(".citySearch").val();
     console.log(city);
+
+
+
+
     var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
 
     var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
 
     // Call Weather
-    loadWeatherData(city);
+    // loadWeatherData(city);
+
 
 
     //Retrieve Lat and Lon
@@ -31,11 +42,17 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
         url: queryCity,
         method: "GET"
-    }).then(function(response) {
-        console.log(response)
+    }).then(function (response) {
+         console.log(response)
+         if (response.location_suggestions.length === 0) {
+            console.log("invalid Input")
+            return
+        } 
+
             //local variables for Lat and Lon
-        var lat = response.location_suggestions[0].latitude
-        var lon = response.location_suggestions[0].longitude
+            var lat = response.location_suggestions[0].latitude
+            var lon = response.location_suggestions[0].longitude
+         
 
         //call restaurant information
         var queryRest = `https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&sort=rating&order=dec&apikey=${zomatoKey}`;
@@ -43,6 +60,14 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
         $.ajax({
             url: queryRest,
             method: "GET"
+<<<<<<< HEAD
+        }).then(function (restaurant) {
+            console.log(restaurant)
+            //Pull random restaurant
+            var i = Math.floor(Math.random() * 21);
+            console.log(i)
+
+=======
         }).then(function(restaurant) {
             console.log(restaurant)
                 //Pull random restaurant
@@ -51,11 +76,15 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
             $('#foodChoice').empty()
 
+>>>>>>> DEV
             var image = $("<img>");
             image.attr("src", restaurant.restaurants[i].restaurant.featured_image)
             image.attr("id", "restImage")
             image.attr("alt", "Image of restaraunt food.")
+<<<<<<< HEAD
+=======
             image.attr("class", "responsive-img")
+>>>>>>> DEV
             console.log(image)
             $("#foodChoice").append(image)
 
@@ -74,12 +103,16 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             console.log(address);
             $("#foodChoice").append(address)
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> DEV
             //     url: queryRest,
             //     method: "GET"
             // }).then(function(restaurant) {
             //     console.log(restaurant)
         })
-    })
+    
 
     //     url: queryRest,
     //     method: "GET"
@@ -113,7 +146,11 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             type: "GET",
             url: queryURL,
             dataType: "json",
+<<<<<<< HEAD
+            success: function (data) {
+=======
             success: function(data) {
+>>>>>>> DEV
                 console.log("data:", data);
 
                 $("#weatherEl").empty();
@@ -143,7 +180,6 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
 
 });
-
 
 
 
@@ -197,4 +233,4 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 //     }).then(function(restaurant){
 //         console.log(restaurant)
 //     })
-// })
+ })
