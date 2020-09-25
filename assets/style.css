@@ -16,21 +16,20 @@ nav {
     height: 100px;
 }
 
-nav .brand-logo {
-    font-size: 40px;
+#copy{
+    /* width: 75vw; */
+    /* margin:0 auto; */
+    color: rgb(206, 206, 206);
+    font-style: italic;
 }
+
+
+/* nav .brand-logo {
+    font-size: 40px;
+} */
 
 .btn {
     background-color: #04092f;
-}
-
-.page-footer {
-    background-color: #d39391;
-    z-index: 2;
-}
-
-.page-footer .footer-copyright {
-    background-color: #d39391;
 }
 
 .input-field {
@@ -57,6 +56,19 @@ nav .brand-logo {
     border-radius: 5px;
     margin-bottom: 100px;
 }
+/*event selectors*/
+h4 {
+    font-size: 32px;
+}
+#foodChoice a{
+    color:lightblue;
+    font-size: 24px;
+}
+
+#eventChoice a{
+    color:lightblue;
+    font-size: 24px;
+}
 
 #eventGroup p{
     font-size: 1.5em;
@@ -67,6 +79,13 @@ nav .brand-logo {
 }
 
 .page-footer {
+    
+    background-color: #d39391;
+    z-index: 2;
+}
+
+.page-footer {
+    height:25px;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -74,4 +93,6 @@ nav .brand-logo {
     background-color: #d39391;
     color: white;
     text-align: center;
+    padding: 0;
 }
+

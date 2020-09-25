@@ -5,10 +5,11 @@ let city = '';
 
 // Date Picker event listener
 
-$(document).ready(function() {
-    $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
-});
+// $(document).ready(function() {
+//     $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
+// });
 
+//trying to make a checked box conditional
 
 
 // event listener for the Make my date button calls weather, zomato, and ticketmaster API's
@@ -43,6 +44,8 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
             // return
         } else {
+            // remove copy text
+            $('.copyText').css('display', 'none')
             // remove hero image
             $('#heroImg').css('display', 'none');
             // remove error div if exists
@@ -110,12 +113,12 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
                         dataType: "json",
 
                         success: function (json) {
+                            $('#eventChoice').empty()
                             if ($("#event").is(":checked") ) {
                                 console.log("hello there");
-                            success: function(json) {
-
-                            $('#eventChoice').empty()
-                            // console.log(json);
+                            
+                            
+                            
                             // Adding Name and ticket URL to Page 
 
                             var eventName = $("<h2>");
