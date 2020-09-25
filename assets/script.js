@@ -108,7 +108,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         async: true,
                         dataType: "json",
                         success: function (json) {
-                            // console.log(json);
+                             console.log(json);
                             // Adding Name and ticket URL to Page 
                             var eventName = $("<h2>");
                             // console.log(json._embedded.events[i].name)
@@ -120,13 +120,55 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                             eventUrl.text("Tickets")
                             $("#eventChoice").append(eventUrl)
                             // console.log(json._embedded.events[i].url)
+
+                            if (response.eventName_suggestions.length === 0) {
+
+                                $(".eventName").val("");
+                    
+                                let invEntry = $(`<div id="warningBox">`);
+                                let invEntryP = $("<p>");
+                                invEntryP.text(`There are no current events in your area!`);
+                                // build and display error Message
+                                invEntry.append(invEntryP)
+                                $("#selections").prepend(invEntry);
+                                $("#selections").attr("style", "color: #a43131; font-size: 1.5rem; font-weight: bold;")
+                    
+                    
+                                // return
+                            } else {
+                                // remove hero image
+                                $('#heroImg').css('display', 'none');
+                                // remove error div if exists
+                                $("#warningBox").css("display", "none")
+                                //local variables for Lat and Lon
+                                var lat = response.location_suggestions[0].latitude
+                                var lon = response.location_suggestions[0].longitude
+
                         },
-                        error: function (xhr, status, err) {
+                        error: function (_xhr, _status, _err) {
+
+                            // if (response.eventName.length === 0) {
+
+                                // $(".eventName").val("");
+                    
+                                // let eventName = $(`<div id="noEvents">`);
+                                // let eventName = $("<p>");
+                                // invEntryP.text(`There are no current events in your area!`);
+                                // // build and display error Message
+                                // invEntry.append(invEntryP)
+                                // $("#selections").prepend(invEntry);
+                                // $("#selections").attr("style", "color: #a43131; font-size: 1.5rem; font-weight: bold;")
+            
+                                // } else {
+                                // $('#heroImg').css('display', 'none');
+                                // $("#warningBox").css("display", "none")
+
+                        },
                         }
                     });
                 };
             });
-
+        
             // Weather
             function loadWeatherData(cityName) {
                 var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
