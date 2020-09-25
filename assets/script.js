@@ -69,7 +69,7 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             $("#foodChoice").append(selectRest)
 
             var type = $("<h4>");
-            type.text(restaurant.restaurants[1].restaurant.cuisines)
+            type.text(restaurant.restaurants[i].restaurant.cuisines)
             console.log(type)
             $("#foodChoice").append(type)
 
