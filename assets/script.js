@@ -9,6 +9,7 @@ $(document).ready(function () {
     $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
 });
 
+//trying to make a checked box conditional
 
 
 // event listener for the Make my date button event on #citySearch
