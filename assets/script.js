@@ -108,11 +108,16 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
                         url: `https://app.ticketmaster.com/discovery/v2/events.json?postalCode=${zipCode}&apikey=TOztRrlp64HE0PRwLSbTGi4Oovx6sfg8`,
                         async: true,
                         dataType: "json",
-                        success: function(json) {
+
+                        success: function (json) {
+                            if ($("#event").is(":checked") ) {
+                                console.log("hello there");
+                            success: function(json) {
 
                             $('#eventChoice').empty()
-                                // console.log(json);
-                                // Adding Name and ticket URL to Page 
+                            // console.log(json);
+                            // Adding Name and ticket URL to Page 
+
                             var eventName = $("<h2>");
                             // console.log(json._embedded.events[i].name)
                             eventName.text(json._embedded.events[i].name)
@@ -122,7 +127,12 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
                             eventUrl.attr('href', json._embedded.events[i].url)
                             eventUrl.text("Tickets")
                             $("#eventChoice").append(eventUrl)
-                                // console.log(json._embedded.events[i].url)
+
+                            // console.log(json._embedded.events[i].url)
+                            } else {
+                                console.log("Not Checked");
+                            }
+
                         },
                         error: function(xhr, status, err) {}
                     });
