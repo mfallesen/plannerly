@@ -11,17 +11,13 @@ $(document).ready(function () {
 
 
 
-// event listener for the Make my date button event on #citySearch
+// event listener for the Make my date button calls weather, zomato, and ticketmaster API's
 
 document.getElementById("dateBtn").addEventListener("click", function (event) {
     event.preventDefault();
 
     city = $(".citySearch").val();
-    // console.log(city);
-
-
     var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
-
     var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
 
     //Retrieve Lat and Lon
@@ -31,22 +27,25 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
         method: "GET"
     }).then(function (response) {
         console.log(response)
+        // check for valid user entry
         if (response.location_suggestions.length === 0) {
-            console.log("invalid Input")
+
             $(".citySearch").val("");
 
             let invEntry = $(`<div id="warningBox">`);
             let invEntryP = $("<p>");
             invEntryP.text(`Please choose a valid city!`);
-            
+            // build and display error Message
             invEntry.append(invEntryP)
             $("#selections").prepend(invEntry);
             $("#selections").attr("style", "color: #a43131; font-size: 1.5rem; font-weight: bold;")
-            
-            
+
+
             // return
         } else {
+            // remove hero image
             $('#heroImg').css('display', 'none');
+            // remove error div if exists
             $("#warningBox").css("display", "none")
             //local variables for Lat and Lon
             var lat = response.location_suggestions[0].latitude
@@ -121,17 +120,11 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                             eventUrl.text("Tickets")
                             $("#eventChoice").append(eventUrl)
                             // console.log(json._embedded.events[i].url)
-
                         },
                         error: function (xhr, status, err) {
-
                         }
                     });
-
-
-
                 };
-
             });
 
             // Weather
@@ -142,21 +135,23 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                     url: queryURL,
                     dataType: "json",
                     success: function (data) {
-                        // console.log("data:", data);
 
+                        // empty previous weather info if any
                         $("#weatherEl").empty();
+                        // build new weather element on screen
                         var weatherElements = `
-      <div class="col s12">
-          <div class="row">
+                            <div class="col s12">
+                                <div class="row">
 
-              <h3 class="card-title">
-                  ${data.name} (${new Date().toLocaleDateString()})
-                  <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"/>
-              </h3>
-              <p class="card-text">Temperature: ${data.main.temp}  °F</p>
-          </div>
-      </div>
-      `;
+                                    <h3 class="card-title">
+                                        ${data.name} (${new Date().toLocaleDateString()})
+                                        <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"/>
+                                    </h3>
+                                    <p class="card-text">Temperature: ${data.main.temp}  °F</p>
+                                </div>
+                            </div>
+                            `;
+                            // add those weather elements to screen
                         $("#weatherEl").html(weatherElements);
                     },
                 });
