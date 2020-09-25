@@ -20,6 +20,10 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
     console.log(city);
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> DEV
     var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
 
     var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
@@ -76,13 +80,49 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             var address = $("<h4>");
             address.text(restaurant.restaurants[i].restaurant.location.address)
             console.log(address);
-            $("#foodChoice").append(address)
+            $("#foodChoice").append(address);
 
+        //    Pulling zipcode from restaurant for nearby event
+            var zipCode= (restaurant.restaurants[i].restaurant.location.zipcode);
+
+            eventGenerator(zipCode)
+            function eventGenerator(zipCode){
+               
+                console.log(zipCode);
+        // AJAX call to ticketmaster to pull any events 
+                $.ajax({
+                    type:"GET",
+                    url:`https://app.ticketmaster.com/discovery/v2/events.json?postalCode=${zipCode}&apikey=TOztRrlp64HE0PRwLSbTGi4Oovx6sfg8`, 
+                    async:true,
+                    dataType: "json",
+                    success: function(json) {
+                                console.log(json);
+        // Adding Name and ticket URL to Page 
+                                var eventName= $("<h2>");
+                                console.log(json._embedded.events[i].name)
+                                eventName.text(json._embedded.events[i].name)
+                                $("#eventChoice").append(eventName)
+                               
+                                var eventUrl=$("<a>");
+                                eventUrl.attr('href', json._embedded.events[i].url)
+                                eventUrl.text("Tickets")
+                                $("#eventChoice").append(eventUrl)
+                                console.log(json._embedded.events[i].url)
+                                
+                             },
+                    error: function(xhr, status, err) {
+                               
+                             }
+                  });
+                
+
+                
+            };
             //     url: queryRest,
             //     method: "GET"
             // }).then(function(restaurant) {
             //     console.log(restaurant)
-        })
+        });
     
 
     //     url: queryRest,
@@ -137,7 +177,11 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             },
         });
     }
+<<<<<<< HEAD
+ // Call Weather fucntion
+=======
     // Call Weather Function
+>>>>>>> DEV
     loadWeatherData(city);
 
 
