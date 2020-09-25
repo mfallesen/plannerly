@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 // event listener for the Make my date button calls weather, zomato, and ticketmaster API's
 
-document.getElementById("dateBtn").addEventListener("click", function (event) {
+document.getElementById("dateBtn").addEventListener("click", function(event) {
     event.preventDefault();
 
     city = $(".citySearch").val();
@@ -25,9 +25,9 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
 
         url: queryCity,
         method: "GET"
-    }).then(function (response) {
+    }).then(function(response) {
         console.log(response)
-        // check for valid user entry
+            // check for valid user entry
         if (response.location_suggestions.length === 0) {
 
             $(".citySearch").val("");
@@ -47,7 +47,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
             $('#heroImg').css('display', 'none');
             // remove error div if exists
             $("#warningBox").css("display", "none")
-            //local variables for Lat and Lon
+                //local variables for Lat and Lon
             var lat = response.location_suggestions[0].latitude
             var lon = response.location_suggestions[0].longitude
 
@@ -58,9 +58,9 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
             $.ajax({
                 url: queryRest,
                 method: "GET"
-            }).then(function (restaurant) {
+            }).then(function(restaurant) {
                 console.log(restaurant)
-                //Pull random restaurant
+                    //Pull random restaurant
                 var i = Math.floor(Math.random() * 21);
                 console.log(i)
 
@@ -71,33 +71,34 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                 image.attr("id", "restImage")
                 image.attr("alt", "Image of restaurant food.")
                 image.attr("class", "responsive-img")
-                // console.log(image)
+                    // console.log(image)
                 $("#foodChoice").append(image)
 
                 var selectRest = $("<h2>");
                 selectRest.text(restaurant.restaurants[i].restaurant.name)
-                // console.log(selectRest)
+                    // console.log(selectRest)
                 $("#foodChoice").append(selectRest)
 
                 var type = $("<h4>");
                 type.text(restaurant.restaurants[i].restaurant.cuisines)
-                // console.log(type)
+                    // console.log(type)
                 $("#foodChoice").append(type)
 
                 var phone = $("<h4>");
                 phone.text(restaurant.restaurants[i].restaurant.phone_numbers)
-                // console.log(phone)
+                    // console.log(phone)
                 $("#foodChoice").append(phone)
 
                 var address = $(`<a  href="https://www.google.com/maps?q=${selectRest} ${restaurant.restaurants[i].restaurant.location.address}" target="blank">`)
                 address.text(restaurant.restaurants[i].restaurant.location.address)
-                // console.log(address);
+                    // console.log(address);
                 $("#foodChoice").append(address);
 
                 //    Pulling zipcode from restaurant for nearby event
                 var zipCode = (restaurant.restaurants[i].restaurant.location.zipcode);
 
                 eventGenerator(zipCode)
+
                 function eventGenerator(zipCode) {
 
                     // console.log(zipCode);
@@ -107,12 +108,16 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         url: `https://app.ticketmaster.com/discovery/v2/events.json?postalCode=${zipCode}&apikey=TOztRrlp64HE0PRwLSbTGi4Oovx6sfg8`,
                         async: true,
                         dataType: "json",
+
                         success: function (json) {
                             if ($("#event").is(":checked") ) {
                                 console.log("hello there");
-                            
+                            success: function(json) {
+
+                            $('#eventChoice').empty()
                             // console.log(json);
                             // Adding Name and ticket URL to Page 
+
                             var eventName = $("<h2>");
                             // console.log(json._embedded.events[i].name)
                             eventName.text(json._embedded.events[i].name)
@@ -122,13 +127,14 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                             eventUrl.attr('href', json._embedded.events[i].url)
                             eventUrl.text("Tickets")
                             $("#eventChoice").append(eventUrl)
+
                             // console.log(json._embedded.events[i].url)
                             } else {
                                 console.log("Not Checked");
                             }
+
                         },
-                        error: function (xhr, status, err) {
-                        }
+                        error: function(xhr, status, err) {}
                     });
                 };
             });
@@ -140,7 +146,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                     type: "GET",
                     url: queryURL,
                     dataType: "json",
-                    success: function (data) {
+                    success: function(data) {
 
                         // empty previous weather info if any
                         $("#weatherEl").empty();
@@ -157,7 +163,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                                 </div>
                             </div>
                             `;
-                            // add those weather elements to screen
+                        // add those weather elements to screen
                         $("#weatherEl").html(weatherElements);
                     },
                 });
