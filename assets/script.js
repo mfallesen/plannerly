@@ -5,9 +5,9 @@ let city = '';
 
 // Date Picker event listener
 
-$(document).ready(function() {
-    $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
-});
+// $(document).ready(function() {
+//     $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
+// });
 
 //trying to make a checked box conditional
 
@@ -44,6 +44,8 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
 
             // return
         } else {
+            // remove copy text
+            $('.copyText').css('display', 'none')
             // remove hero image
             $('#heroImg').css('display', 'none');
             // remove error div if exists
