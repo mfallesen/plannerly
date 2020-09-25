@@ -58,6 +58,14 @@ nav .brand-logo {
     margin-bottom: 100px;
 }
 
+#eventGroup p{
+    font-size: 1.5em;
+}
+#eventGroup p label span {
+    font-size: 1.5em;
+    color: black;
+}
+
 .page-footer {
     position: fixed;
     left: 0;

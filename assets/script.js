@@ -108,6 +108,9 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         async: true,
                         dataType: "json",
                         success: function (json) {
+                            if ($("#event").is(":checked") ) {
+                                console.log("hello there");
+                            
                             // console.log(json);
                             // Adding Name and ticket URL to Page 
                             var eventName = $("<h2>");
@@ -120,6 +123,9 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                             eventUrl.text("Tickets")
                             $("#eventChoice").append(eventUrl)
                             // console.log(json._embedded.events[i].url)
+                            } else {
+                                console.log("Not Checked");
+                            }
                         },
                         error: function (xhr, status, err) {
                         }
