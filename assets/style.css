@@ -13,6 +13,7 @@ main {
 
 nav {
     background-color: #d39391;
+    height: 100px;
 }
 
 nav .brand-logo {
