@@ -113,12 +113,12 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
                         dataType: "json",
 
                         success: function (json) {
+                            $('#eventChoice').empty()
                             if ($("#event").is(":checked") ) {
                                 console.log("hello there");
-                            success: function(json) {
-
-                            $('#eventChoice').empty()
-                            // console.log(json);
+                            
+                            
+                            
                             // Adding Name and ticket URL to Page 
 
                             var eventName = $("<h2>");
