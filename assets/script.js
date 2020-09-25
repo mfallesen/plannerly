@@ -5,10 +5,11 @@ let city = '';
 
 // Date Picker event listener
 
-$(document).ready(function() {
-    $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
-});
+// $(document).ready(function() {
+//     $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
+// });
 
+//trying to make a checked box conditional
 
 
 // event listener for the Make my date button calls weather, zomato, and ticketmaster API's
@@ -43,6 +44,8 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
 
             // return
         } else {
+            // remove copy text
+            $('.copyText').css('display', 'none')
             // remove hero image
             $('#heroImg').css('display', 'none');
             // remove error div if exists
@@ -98,6 +101,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                 var zipCode = (restaurant.restaurants[i].restaurant.location.zipcode);
 
                 eventGenerator(zipCode)
+
                 function eventGenerator(zipCode) {
 
                     // console.log(zipCode);
@@ -107,68 +111,61 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         url: `https://app.ticketmaster.com/discovery/v2/events.json?postalCode=${zipCode}&apikey=TOztRrlp64HE0PRwLSbTGi4Oovx6sfg8`,
                         async: true,
                         dataType: "json",
+
                         success: function (json) {
-                             console.log(json);
-                            // Adding Name and ticket URL to Page 
-                            var eventName = $("<h2>");
-                            // console.log(json._embedded.events[i].name)
-                            eventName.text(json._embedded.events[i].name)
-                            $("#eventChoice").append(eventName)
+                            $('#eventChoice').empty()
+                            if ($("#event").is(":checked")) {
+                                console.log("hello there");
 
-                            var eventUrl = $("<a>");
-                            eventUrl.attr('href', json._embedded.events[i].url)
-                            eventUrl.text("Tickets")
-                            $("#eventChoice").append(eventUrl)
-                            // console.log(json._embedded.events[i].url)
 
-                            if (response.eventName_suggestions.length === 0) {
 
-                                $(".eventName").val("");
-                    
-                                let invEntry = $(`<div id="warningBox">`);
-                                let invEntryP = $("<p>");
-                                invEntryP.text(`There are no current events in your area!`);
-                                // build and display error Message
-                                invEntry.append(invEntryP)
-                                $("#selections").prepend(invEntry);
-                                $("#selections").attr("style", "color: #a43131; font-size: 1.5rem; font-weight: bold;")
-                    
-                    
-                                // return
+                                // Adding Name and ticket URL to Page 
+
+                                var eventName = $("<h2>");
+                                // console.log(json._embedded.events[i].name)
+                                eventName.text(json._embedded.events[i].name)
+                                $("#eventChoice").append(eventName)
+
+                                var eventUrl = $("<a>");
+                                eventUrl.attr('href', json._embedded.events[i].url)
+                                eventUrl.text("Tickets")
+                                $("#eventChoice").append(eventUrl)
+
+                                // console.log(json._embedded.events[i].url)
                             } else {
-                                // remove hero image
-                                $('#heroImg').css('display', 'none');
-                                // remove error div if exists
-                                $("#warningBox").css("display", "none")
-                                //local variables for Lat and Lon
-                                var lat = response.location_suggestions[0].latitude
-                                var lon = response.location_suggestions[0].longitude
+                                console.log("Not Checked");
+                            }
+                                if (response.eventName_suggestions.length === 0) {
+
+                                    $(".eventName").val("");
+
+                                    let invEntry = $(`<div id="warningBox">`);
+                                    let invEntryP = $("<p>");
+                                    invEntryP.text(`There are no current events in your area!`);
+                                    // build and display error Message
+                                    invEntry.append(invEntryP)
+                                    $("#selections").prepend(invEntry);
+                                    $("#selections").attr("style", "color: #a43131; font-size: 1.5rem; font-weight: bold;")
+
+
+                                    // return
+                                } else {
+                                    // remove hero image
+                                    $('#heroImg').css('display', 'none');
+                                    // remove error div if exists
+                                    $("#warningBox").css("display", "none")
+                                    //local variables for Lat and Lon
+                                    var lat = response.location_suggestions[0].latitude
+                                    var lon = response.location_suggestions[0].longitude
+
+                                    }
 
                         },
-                        error: function (_xhr, _status, _err) {
-
-                            // if (response.eventName.length === 0) {
-
-                                // $(".eventName").val("");
-                    
-                                // let eventName = $(`<div id="noEvents">`);
-                                // let eventName = $("<p>");
-                                // invEntryP.text(`There are no current events in your area!`);
-                                // // build and display error Message
-                                // invEntry.append(invEntryP)
-                                // $("#selections").prepend(invEntry);
-                                // $("#selections").attr("style", "color: #a43131; font-size: 1.5rem; font-weight: bold;")
-            
-                                // } else {
-                                // $('#heroImg').css('display', 'none');
-                                // $("#warningBox").css("display", "none")
-
-                        },
-                        }
+                        error: function (xhr, status, err) { }
                     });
                 };
             });
-        
+
             // Weather
             function loadWeatherData(cityName) {
                 var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=abea8c198be08a98a25f51dd94240c1c&units=imperial`;
@@ -193,7 +190,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                                 </div>
                             </div>
                             `;
-                            // add those weather elements to screen
+                        // add those weather elements to screen
                         $("#weatherEl").html(weatherElements);
                     },
                 });
