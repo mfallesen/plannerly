@@ -20,10 +20,6 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
     console.log(city);
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> DEV
     var zomatoKey = "93c8753e5621d75fe88dade8f7ea42d4"
 
     var queryCity = `https://developers.zomato.com/api/v2.1/locations?query=${city}&apikey=${zomatoKey}`;
@@ -177,11 +173,7 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             },
         });
     }
-<<<<<<< HEAD
- // Call Weather fucntion
-=======
     // Call Weather Function
->>>>>>> DEV
     loadWeatherData(city);
 
 
