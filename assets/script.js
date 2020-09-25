@@ -5,7 +5,7 @@ let city = '';
 
 // Date Picker event listener
 
-$(document).ready(function () {
+$(document).ready(function() {
     $('.datepicker').datepicker({ defaultDate: new Date(), setDefaultDate: true, minDate: new Date() });
 });
 
@@ -89,7 +89,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                 // console.log(phone)
                 $("#foodChoice").append(phone)
 
-                var address = $("<h4>");
+                var address = $(`<a  href="https://www.google.com/maps?q=${selectRest} ${restaurant.restaurants[i].restaurant.location.address}" target="blank">`)
                 address.text(restaurant.restaurants[i].restaurant.location.address)
                 // console.log(address);
                 $("#foodChoice").append(address);
