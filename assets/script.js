@@ -68,6 +68,11 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             console.log(selectRest)
             $("#foodChoice").append(selectRest)
 
+            var type = $("<h4>");
+            type.text(restaurant.restaurants[1].restaurant.cuisines)
+            console.log(type)
+            $("#foodChoice").append(type)
+
             var phone = $("<h4>");
             phone.text(restaurant.restaurants[i].restaurant.phone_numbers)
             console.log(phone)
