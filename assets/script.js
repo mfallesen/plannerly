@@ -68,15 +68,15 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             console.log(phone)
             $("#foodChoice").append(phone)
 
-            var address = $("<h4>");
+            var address = $(`<a  href="https://www.google.com/maps?q=${selectRest} ${restaurant.restaurants[i].restaurant.location.address}" target="blank">`)
             address.text(restaurant.restaurants[i].restaurant.location.address)
             console.log(address);
             $("#foodChoice").append(address)
-
-            //     url: queryRest,
-            //     method: "GET"
-            // }).then(function(restaurant) {
-            //     console.log(restaurant)
+                // GOOGLE MAPS: https://www.google.com/maps?q=
+                //     url: queryRest,
+                //     method: "GET"
+                // }).then(function(restaurant) {
+                //     console.log(restaurant)
         })
     })
 
