@@ -60,7 +60,11 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
 
             $.ajax({
                 url: queryRest,
+<<<<<<< HEAD
                 method: "GET",
+=======
+                method: "GET"
+>>>>>>> DEV
             }).then(function (restaurant) {
                 console.log(restaurant)
                 //Pull random restaurant
@@ -115,6 +119,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         success: function (json) {
                             $('#eventChoice').empty()
                             if ($("#event").is(":checked")) {
+<<<<<<< HEAD
                                 // declare eventName to be usable by both conditions
                                 var eventName = $("<h2>");
                                 
@@ -152,15 +157,62 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                                 // // console.log(json._embedded.events[i].url)
 
 
+=======
+                                console.log("hello there");
+
+
+
+                                // Adding Name and ticket URL to Page 
+
+                                var eventName = $("<h2>");
+                                // console.log(json._embedded.events[i].name)
+                                eventName.text(json._embedded.events[i].name)
+                                $("#eventChoice").append(eventName)
+
+                                var eventUrl = $("<a>");
+                                eventUrl.attr('href', json._embedded.events[i].url)
+                                eventUrl.text("Tickets")
+                                $("#eventChoice").append(eventUrl)
+
+                                // console.log(json._embedded.events[i].url)
+>>>>>>> DEV
                             } else {
                                 console.log("Not Checked");
                             }
+                                if (response.eventName_suggestions.length === 0) {
+
+                                    $(".eventName").val("");
+
+                                    let invEntry = $(`<div id="warningBox">`);
+                                    let invEntryP = $("<p>");
+                                    invEntryP.text(`There are no current events in your area!`);
+                                    // build and display error Message
+                                    invEntry.append(invEntryP)
+                                    $("#selections").prepend(invEntry);
+                                    $("#selections").attr("style", "color: #a43131; font-size: 1.5rem; font-weight: bold;")
+
+
+                                    // return
+                                } else {
+                                    // remove hero image
+                                    $('#heroImg').css('display', 'none');
+                                    // remove error div if exists
+                                    $("#warningBox").css("display", "none")
+                                    //local variables for Lat and Lon
+                                    var lat = response.location_suggestions[0].latitude
+                                    var lon = response.location_suggestions[0].longitude
+
+                                    }
 
                         },
+<<<<<<< HEAD
                         error: function (xhr, status, err) { 
                             console.log(status);
                             console.log(err);
                         }
+=======
+                        error: function (xhr, status, err) { }
+>>>>>>> DEV
                     });
                 };
             });
