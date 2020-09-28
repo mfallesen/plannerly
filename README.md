@@ -9,16 +9,16 @@ Simply choose the city you're in and click the "Make My Date" button and off you
 
 ![Restaurant Suggestion](/assets/images/restaurantOption.png)
 
-![Event Suggestion](/assets/images/eventOption.png)
+![Event Suggestion](/assets/images/eventOption.PNG)
 
 
 
 For finding your restaurant we even provide a google maps link that will take you directly to dinner. 
 
-![Restaurant Directions](/assets/images/restaurantDirections.png)
+![Restaurant Directions](/assets/images/restaurantDirections.PNG)
 
 Then for your event we also provide you the direct link to purchase your tickets taking out any further research you might have to do. 
-![Event Tickets](/assets/images/eventTickets.png)
+![Event Tickets](/assets/images/eventTickets.PNG)
 
 ## Bring a Jacket!
 
