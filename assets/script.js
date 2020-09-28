@@ -60,11 +60,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
 
             $.ajax({
                 url: queryRest,
-<<<<<<< HEAD
                 method: "GET",
-=======
-                method: "GET"
->>>>>>> DEV
             }).then(function (restaurant) {
                 console.log(restaurant)
                 //Pull random restaurant
@@ -119,7 +115,6 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         success: function (json) {
                             $('#eventChoice').empty()
                             if ($("#event").is(":checked")) {
-<<<<<<< HEAD
                                 // declare eventName to be usable by both conditions
                                 var eventName = $("<h2>");
                                 
@@ -157,25 +152,6 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                                 // // console.log(json._embedded.events[i].url)
 
 
-=======
-                                console.log("hello there");
-
-
-
-                                // Adding Name and ticket URL to Page 
-
-                                var eventName = $("<h2>");
-                                // console.log(json._embedded.events[i].name)
-                                eventName.text(json._embedded.events[i].name)
-                                $("#eventChoice").append(eventName)
-
-                                var eventUrl = $("<a>");
-                                eventUrl.attr('href', json._embedded.events[i].url)
-                                eventUrl.text("Tickets")
-                                $("#eventChoice").append(eventUrl)
-
-                                // console.log(json._embedded.events[i].url)
->>>>>>> DEV
                             } else {
                                 console.log("Not Checked");
                             }
@@ -205,14 +181,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                                     }
 
                         },
-<<<<<<< HEAD
-                        error: function (xhr, status, err) { 
-                            console.log(status);
-                            console.log(err);
-                        }
-=======
                         error: function (xhr, status, err) { }
->>>>>>> DEV
                     });
                 };
             });
@@ -232,7 +201,6 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         var weatherElements = `
                             <div class="col s12">
                                 <div class="row">
-
                                     <h3 class="card-title">
                                         ${data.name} (${new Date().toLocaleDateString()})
                                         <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"/>
