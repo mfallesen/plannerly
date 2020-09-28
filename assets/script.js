@@ -60,7 +60,7 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
 
             $.ajax({
                 url: queryRest,
-                method: "GET"
+                method: "GET",
             }).then(function (restaurant) {
                 console.log(restaurant)
                 //Pull random restaurant
@@ -115,23 +115,43 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         success: function (json) {
                             $('#eventChoice').empty()
                             if ($("#event").is(":checked")) {
-                                console.log("hello there");
+                                // declare eventName to be usable by both conditions
+                                var eventName = $("<h2>");
+                                
+                                if (json.page.totalElements == 0 ) {
+                                    eventName.text(`We're sorry. No events found near your restaurant`);
+                                    eventName.css("font-size", "2rem")
+                                    $("#eventChoice").append(eventName);
+                                } else {
+                                    
+                                    // console.log(json._embedded.events[i].name)
+                                    eventName.text(json._embedded.events[i].name)
+                                    $("#eventChoice").append(eventName)
 
+                                    var eventUrl = $("<a>");
+                                    eventUrl.attr('href', json._embedded.events[i].url)
+                                    eventUrl.text("Tickets")
+                                    $("#eventChoice").append(eventUrl)
 
+                                    // console.log(json._embedded.events[i].url)
+                                }
+                                console.log(json);
 
                                 // Adding Name and ticket URL to Page 
 
-                                var eventName = $("<h2>");
-                                // console.log(json._embedded.events[i].name)
-                                eventName.text(json._embedded.events[i].name)
-                                $("#eventChoice").append(eventName)
+                                // var eventName = $("<h2>");
+                                // // console.log(json._embedded.events[i].name)
+                                // eventName.text(json._embedded.events[i].name)
+                                // $("#eventChoice").append(eventName)
 
-                                var eventUrl = $("<a>");
-                                eventUrl.attr('href', json._embedded.events[i].url)
-                                eventUrl.text("Tickets")
-                                $("#eventChoice").append(eventUrl)
+                                // var eventUrl = $("<a>");
+                                // eventUrl.attr('href', json._embedded.events[i].url)
+                                // eventUrl.text("Tickets")
+                                // $("#eventChoice").append(eventUrl)
 
-                                // console.log(json._embedded.events[i].url)
+                                // // console.log(json._embedded.events[i].url)
+
+
                             } else {
                                 console.log("Not Checked");
                             }
@@ -181,7 +201,6 @@ document.getElementById("dateBtn").addEventListener("click", function (event) {
                         var weatherElements = `
                             <div class="col s12">
                                 <div class="row">
-
                                     <h3 class="card-title">
                                         ${data.name} (${new Date().toLocaleDateString()})
                                         <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png"/>
