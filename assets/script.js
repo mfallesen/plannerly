@@ -14,7 +14,7 @@ let city = '';
 
 // event listener for the Make my date button calls weather, zomato, and ticketmaster API's
 
-document.getElementById("dateBtn").addEventListener("click", function(event) {
+document.getElementById("dateBtn").addEventListener("click", function (event) {
     event.preventDefault();
 
     city = $(".citySearch").val();
@@ -26,9 +26,9 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
         url: queryCity,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response)
-            // check for valid user entry
+        // check for valid user entry
         if (response.location_suggestions.length === 0) {
 
             $(".citySearch").val("");
@@ -50,7 +50,7 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
             $('#heroImg').css('display', 'none');
             // remove error div if exists
             $("#warningBox").css("display", "none")
-                //local variables for Lat and Lon
+            //local variables for Lat and Lon
             var lat = response.location_suggestions[0].latitude
             var lon = response.location_suggestions[0].longitude
 
@@ -60,10 +60,14 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
             $.ajax({
                 url: queryRest,
+<<<<<<< HEAD
+                method: "GET",
+=======
                 method: "GET"
-            }).then(function(restaurant) {
+>>>>>>> DEV
+            }).then(function (restaurant) {
                 console.log(restaurant)
-                    //Pull random restaurant
+                //Pull random restaurant
                 var i = Math.floor(Math.random() * 21);
                 console.log(i)
 
@@ -74,27 +78,27 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
                 image.attr("id", "restImage")
                 image.attr("alt", "Image of restaurant food.")
                 image.attr("class", "responsive-img")
-                    // console.log(image)
+                // console.log(image)
                 $("#foodChoice").append(image)
 
                 var selectRest = $("<h2>");
                 selectRest.text(restaurant.restaurants[i].restaurant.name)
-                    // console.log(selectRest)
+                // console.log(selectRest)
                 $("#foodChoice").append(selectRest)
 
                 var type = $("<h4>");
                 type.text(restaurant.restaurants[i].restaurant.cuisines)
-                    // console.log(type)
+                // console.log(type)
                 $("#foodChoice").append(type)
 
                 var phone = $("<h4>");
                 phone.text(restaurant.restaurants[i].restaurant.phone_numbers)
-                    // console.log(phone)
+                // console.log(phone)
                 $("#foodChoice").append(phone)
 
                 var address = $(`<a  href="https://www.google.com/maps?q=${selectRest} ${restaurant.restaurants[i].restaurant.location.address}" target="blank">`)
                 address.text(restaurant.restaurants[i].restaurant.location.address)
-                    // console.log(address);
+                // console.log(address);
                 $("#foodChoice").append(address);
 
                 //    Pulling zipcode from restaurant for nearby event
@@ -104,7 +108,7 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
                 function eventGenerator(zipCode) {
 
-                    // console.log(zipCode);
+                    console.log(zipCode);
                     // AJAX call to ticketmaster to pull any events 
                     $.ajax({
                         type: "GET",
@@ -114,30 +118,101 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
 
                         success: function (json) {
                             $('#eventChoice').empty()
-                            if ($("#event").is(":checked") ) {
+                            if ($("#event").is(":checked")) {
+<<<<<<< HEAD
+                                // declare eventName to be usable by both conditions
+                                var eventName = $("<h2>");
+                                
+                                if (json.page.totalElements == 0 ) {
+                                    eventName.text(`We're sorry. No events found near your restaurant`);
+                                    eventName.css("font-size", "2rem")
+                                    $("#eventChoice").append(eventName);
+                                } else {
+                                    
+                                    // console.log(json._embedded.events[i].name)
+                                    eventName.text(json._embedded.events[i].name)
+                                    $("#eventChoice").append(eventName)
+
+                                    var eventUrl = $("<a>");
+                                    eventUrl.attr('href', json._embedded.events[i].url)
+                                    eventUrl.text("Tickets")
+                                    $("#eventChoice").append(eventUrl)
+
+                                    // console.log(json._embedded.events[i].url)
+                                }
+                                console.log(json);
+
+                                // Adding Name and ticket URL to Page 
+
+                                // var eventName = $("<h2>");
+                                // // console.log(json._embedded.events[i].name)
+                                // eventName.text(json._embedded.events[i].name)
+                                // $("#eventChoice").append(eventName)
+
+                                // var eventUrl = $("<a>");
+                                // eventUrl.attr('href', json._embedded.events[i].url)
+                                // eventUrl.text("Tickets")
+                                // $("#eventChoice").append(eventUrl)
+
+                                // // console.log(json._embedded.events[i].url)
+
+
+=======
                                 console.log("hello there");
-                            
-                            
-                            
-                            // Adding Name and ticket URL to Page 
 
-                            var eventName = $("<h2>");
-                            // console.log(json._embedded.events[i].name)
-                            eventName.text(json._embedded.events[i].name)
-                            $("#eventChoice").append(eventName)
 
-                            var eventUrl = $("<a>");
-                            eventUrl.attr('href', json._embedded.events[i].url)
-                            eventUrl.text("Tickets")
-                            $("#eventChoice").append(eventUrl)
 
-                            // console.log(json._embedded.events[i].url)
+                                // Adding Name and ticket URL to Page 
+
+                                var eventName = $("<h2>");
+                                // console.log(json._embedded.events[i].name)
+                                eventName.text(json._embedded.events[i].name)
+                                $("#eventChoice").append(eventName)
+
+                                var eventUrl = $("<a>");
+                                eventUrl.attr('href', json._embedded.events[i].url)
+                                eventUrl.text("Tickets")
+                                $("#eventChoice").append(eventUrl)
+
+                                // console.log(json._embedded.events[i].url)
+>>>>>>> DEV
                             } else {
                                 console.log("Not Checked");
                             }
+                                if (response.eventName_suggestions.length === 0) {
+
+                                    $(".eventName").val("");
+
+                                    let invEntry = $(`<div id="warningBox">`);
+                                    let invEntryP = $("<p>");
+                                    invEntryP.text(`There are no current events in your area!`);
+                                    // build and display error Message
+                                    invEntry.append(invEntryP)
+                                    $("#selections").prepend(invEntry);
+                                    $("#selections").attr("style", "color: #a43131; font-size: 1.5rem; font-weight: bold;")
+
+
+                                    // return
+                                } else {
+                                    // remove hero image
+                                    $('#heroImg').css('display', 'none');
+                                    // remove error div if exists
+                                    $("#warningBox").css("display", "none")
+                                    //local variables for Lat and Lon
+                                    var lat = response.location_suggestions[0].latitude
+                                    var lon = response.location_suggestions[0].longitude
+
+                                    }
 
                         },
-                        error: function(xhr, status, err) {}
+<<<<<<< HEAD
+                        error: function (xhr, status, err) { 
+                            console.log(status);
+                            console.log(err);
+                        }
+=======
+                        error: function (xhr, status, err) { }
+>>>>>>> DEV
                     });
                 };
             });
@@ -149,7 +224,7 @@ document.getElementById("dateBtn").addEventListener("click", function(event) {
                     type: "GET",
                     url: queryURL,
                     dataType: "json",
-                    success: function(data) {
+                    success: function (data) {
 
                         // empty previous weather info if any
                         $("#weatherEl").empty();
